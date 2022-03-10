@@ -21,4 +21,22 @@ router.post("/register", async (req, res) => {
 	}
 });
 
+router.post("/login", async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.body.email });
+		if (!user) {
+			return res.status(400).send("Usário ou senha inválidos");
+		}
+
+		const isMatch = await bcrypt.compare(req.body.password, user.password);
+		if (!isMatch) {
+			return res.status(400).send("Usário ou senha inválidos");
+		}
+
+		res.status(200).send(user);
+	} catch (err) {
+		res.status(500).send("Houve um erro com o db: " + err);
+	}
+});
+
 module.exports = router;
