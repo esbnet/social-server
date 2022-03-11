@@ -28,7 +28,7 @@ router.put("/:id", async (req, res) => {
 			);
 			res.status(200).json("Post alterado com sucesso!");
 		} else {
-			res.status(403).json("Você só pode alterar seu post");
+			res.status(403).json("Você só pode alterar seus posts");
 		}
 	} catch (error) {
 		res.status(500).json(error);
@@ -36,6 +36,21 @@ router.put("/:id", async (req, res) => {
 });
 
 //delete a post
+router.delete("/:id", async (req, res) => {
+	const post = await Post.findById(req.params.id);
+
+	try {
+		if (post.userId === req.body.userId) {
+			await Post.findByIdAndDelete(req.params.id);
+			res.status(200).json("Post deletado com sucesso!");
+		} else {
+			res.status(403).json("Você só pode deletar seus posts");
+		}
+	} catch (error) {
+		res.status(500).json(error);
+	}
+});
+
 //like a post
 //get a post by id
 //get timeline posts
