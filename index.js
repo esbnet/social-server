@@ -14,7 +14,7 @@ dotenv.config();
 mongoose.connect(
 	process.env.MONGO_URL,
 	{ useNewUrlParser: true, useUnifiedTopology: true },
-	() => console.log("Connected to MongoDB 🚀  !")
+	() => console.log("🚀 Connected to MongoDB")
 );
 
 const app = expres();
@@ -29,5 +29,5 @@ app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
 app.listen(8800, () => {
-	console.log("server is running on port 8800 🚀 ");
+	console.log("🚀 server is running on port 8800");
 });
