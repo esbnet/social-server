@@ -72,7 +72,9 @@ router.put("/:id/likes", async (req, res) => {
 	}
 });
 
+
 //get a post by id
+
 //get timeline posts
 
 module.exports = router;
