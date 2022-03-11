@@ -16,9 +16,13 @@ router.put("/:Id", async (req, res) => {
 		}
 
 		try {
-			const user = await User.findByIdAndUpdate(req.params.Id, {
-				$set: req.body,
-			});
+			const user = await User.findByIdAndUpdate(
+				req.params.Id,
+				{
+					$set: req.body,
+				},
+				{ new: true }
+			);
 			res.status(200).json("Usuário atualizado com sucesso!");
 		} catch (err) {
 			return res.status(500).json(err);
@@ -93,7 +97,7 @@ router.put("/:id/unfollow", async (req, res) => {
 			res.status(500).json("Houve um erro com o db: " + err);
 		}
 	} else {
-		res.status(403).json("Você não pode deixar de seguir a você mesmo!"); 
+		res.status(403).json("Você não pode deixar de seguir a você mesmo!");
 	}
 });
 
